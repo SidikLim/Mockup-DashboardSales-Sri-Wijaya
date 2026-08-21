@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Transaksi Leads — Leads &amp; Prospek Management</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ============================= SIDEBAR ============================= -->
+  <aside class="sidebar" id="sidebar">
+    <button class="sidebar__collapse-btn" id="sidebarCollapseBtn" title="Ciutkan / perluas menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <div class="sidebar__brand">
+      <div class="sidebar__brand-mark">LP</div>
+      <div class="sidebar__brand-text">
+        <h1>Leads &amp; Prospek</h1>
+        <span>Management System</span>
+      </div>
+    </div>
+    <nav class="sidebar__nav">
+      <div class="sidebar__section-label">Dashboard</div>
+      <a href="dashboard-tier1.html" class="side-link" data-key="dashboard-tier1" title="Dashboard SSM Tier 1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V10M10 19V4M16 19v-6M4 19h16"/></svg>
+        <span class="side-link__text">Dashboard SSM Tier 1</span>
+      </a>
+      <a href="dashboard-tier2.html" class="side-link" data-key="dashboard-tier2" title="Dashboard SSM Tier 2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V10M10 19V4M16 19v-6M4 19h16"/></svg>
+        <span class="side-link__text">Dashboard SSM Tier 2</span>
+      </a>
+      <div class="sidebar__section-label">Transaksi</div>
+      <a href="leads-list.html" class="side-link" data-key="leads-list" title="Transaksi Leads">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+        <span class="side-link__text">Transaksi Leads</span> <span class="count-pill" id="sideCountLeads">0</span>
+      </a>
+      <a href="prospects-list.html" class="side-link" data-key="prospects-list" title="Transaksi Prospek">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+        <span class="side-link__text">Transaksi Prospek</span> <span class="count-pill" id="sideCountProspects">0</span>
+      </a>
+      <div class="sidebar__section-label">Report</div>
+      <a href="report-leads.html" class="side-link" data-key="report-leads" title="Laporan Leads">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
+        <span class="side-link__text">Laporan Leads</span>
+      </a>
+      <a href="report-prospects.html" class="side-link" data-key="report-prospects" title="Laporan Prospek">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
+        <span class="side-link__text">Laporan Prospek</span>
+      </a>
+    </nav>
+    <div class="sidebar__foot">
+      <div class="app-clock" id="appClock"><b>-</b></div>
+    </div>
+  </aside>
+
+  <!-- ============================= CONTENT ============================= -->
+  <div class="app-content">
+
+    <form id="formLeads" novalidate>
+      <div class="form-page-head">
+        <div class="form-page-head__text">
+          <h2 id="pageTitle">Transaksi Leads Baru</h2>
+          <p id="pageSubtitle">Nomor Bukti akan dibuat otomatis saat disimpan</p>
+        </div>
+      </div>
+
+      <div class="form-page-body">
+        <div class="breadcrumb"><a href="leads-list.html">Transaksi Leads</a> / <span id="breadcrumbCurrent">Baru</span></div>
+
+        <div class="form-section">
+          <div class="form-section__title">Identitas Transaksi</div>
+          <div class="form-grid">
+            <div class="form-field span-2">
+              <label>Nomor Bukti Leads</label>
+              <input type="text" id="formLeadsIdDisplay" readonly>
+              <input type="hidden" id="formLeadsId">
+            </div>
+            <div class="form-field">
+              <label>Leads Date <span class="req">*</span></label>
+              <input type="date" id="formLeadsDate" required>
+            </div>
+            <div class="form-field">
+              <label>Leads Date (Formatted) <span class="opt">otomatis</span></label>
+              <input type="text" id="formLeadsDateLong" readonly>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section__title">Klasifikasi Leads</div>
+          <div class="form-grid">
+            <div class="form-field"><label>Leads Generation <span class="req">*</span></label><select id="formLeadsGeneration" required></select></div>
+            <div class="form-field"><label>Leads Type <span class="req">*</span></label><select id="formLeadsType" required></select></div>
+            <div class="form-field span-2"><label>Leads Source <span class="req">*</span></label><select id="formLeadsSource" required></select></div>
+            <div class="form-field"><label>PIC <span class="req">*</span></label><select id="formLeadsPic" required></select></div>
+            <div class="form-field"><label>PIC Name <span class="req">*</span></label><select id="formLeadsPicName" required></select></div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section__title">Kualifikasi</div>
+          <div class="form-grid">
+            <div class="form-field"><label>Leads Rating <span class="req">*</span></label><select id="formLeadsRating" required></select></div>
+            <div class="form-field"><label>PQL <span class="req">*</span></label><select id="formLeadsPQL" required></select></div>
+            <div class="form-field"><label>QQL <span class="req">*</span></label><select id="formLeadsQQL" required></select></div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section__title">Detail Produk <span class="opt">(multi item — dapat menambahkan lebih dari satu produk)</span></div>
+          <div class="item-table-actions">
+            <span class="hint">Minimal 1 item produk wajib diisi. Total Amount dihitung otomatis (Estimated Price × Unit Qty × Duration).</span>
+            <button type="button" class="btn btn-outline btn-sm" id="btnAddItem">+ Tambah Item</button>
+          </div>
+          <div class="item-table-wrap">
+            <table class="item-table" id="itemTable">
+              <thead>
+                <tr>
+                  <th style="width:26px;">No</th>
+                  <th>Product Group</th>
+                  <th>Product Brand</th>
+                  <th>Product Model</th>
+                  <th style="width:80px;">Unit Qty</th>
+                  <th style="width:150px;">Estimated Price (IDR)</th>
+                  <th style="width:150px;">Duration</th>
+                  <th style="width:150px;">Total Amount (IDR)</th>
+                  <th style="width:36px;"></th>
+                </tr>
+              </thead>
+              <tbody id="itemTableBody"></tbody>
+              <tfoot>
+                <tr><td colspan="7" style="text-align:right;">Grand Total (Total Amount)</td><td id="itemGrandTotal">Rp 0</td><td></td></tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section__title">Komersial</div>
+          <div class="form-grid">
+            <div class="form-field span-2"><label>Total Amount (IDR) <span class="opt">otomatis dari Detail Produk</span></label><input type="text" id="formLeadsTotal" class="calc-value" readonly></div>
+            <div class="form-field span-2"><label>Leads Amount (IDR) <span class="req">*</span></label><input type="number" id="formLeadsAmount" min="0" step="1" required></div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section__title">Informasi Customer</div>
+          <div class="form-grid">
+            <div class="form-field span-2"><label>Customer Name <span class="req">*</span></label><input type="text" id="formLeadsCustomerName" required placeholder="Nama perusahaan / perorangan"></div>
+            <div class="form-field"><label>Customer PIC <span class="opt">opsional</span></label><input type="text" id="formLeadsCustomerPIC" placeholder="Contoh: Bpk. Ronaldo"></div>
+            <div class="form-field"><label>Title <span class="opt">opsional</span></label><input type="text" id="formLeadsTitle" placeholder="Contoh: Operational Manager"></div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section__title">Ringkasan Rujukan <span class="opt">(read-only)</span></div>
+          <div class="form-grid">
+            <div class="form-field"><label>Prospects Amount (IDR)</label><input type="text" id="formLeadsProspectsAmount" readonly></div>
+            <div class="form-field"><label>Quotation Amount (IDR)</label><input type="text" id="formLeadsQuotationAmount" readonly></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-page-foot">
+        <a href="leads-list.html" class="btn btn-outline">Batal</a>
+        <button type="submit" class="btn btn-primary">Simpan Transaksi Leads</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<div class="toast-stack" id="toastStack"></div>
+
+<script src="common.js"></script>
+<script src="leads-form.js"></script>
+</body>
+</html>

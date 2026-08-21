@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transaksi Prospek — Leads &amp; Prospek Management</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ============================= SIDEBAR ============================= -->
+  <aside class="sidebar" id="sidebar">
+    <button class="sidebar__collapse-btn" id="sidebarCollapseBtn" title="Ciutkan / perluas menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <div class="sidebar__brand">
+      <div class="sidebar__brand-mark">LP</div>
+      <div class="sidebar__brand-text">
+        <h1>Leads &amp; Prospek</h1>
+        <span>Management System</span>
+      </div>
+    </div>
+    <nav class="sidebar__nav">
+      <div class="sidebar__section-label">Dashboard</div>
+      <a href="dashboard-tier1.html" class="side-link" data-key="dashboard-tier1" title="Dashboard SSM Tier 1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V10M10 19V4M16 19v-6M4 19h16"/></svg>
+        <span class="side-link__text">Dashboard SSM Tier 1</span>
+      </a>
+      <a href="dashboard-tier2.html" class="side-link" data-key="dashboard-tier2" title="Dashboard SSM Tier 2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V10M10 19V4M16 19v-6M4 19h16"/></svg>
+        <span class="side-link__text">Dashboard SSM Tier 2</span>
+      </a>
+      <div class="sidebar__section-label">Transaksi</div>
+      <a href="leads-list.html" class="side-link" data-key="leads-list" title="Transaksi Leads">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+        <span class="side-link__text">Transaksi Leads</span> <span class="count-pill" id="sideCountLeads">0</span>
+      </a>
+      <a href="prospects-list.html" class="side-link" data-key="prospects-list" title="Transaksi Prospek">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+        <span class="side-link__text">Transaksi Prospek</span> <span class="count-pill" id="sideCountProspects">0</span>
+      </a>
+      <div class="sidebar__section-label">Report</div>
+      <a href="report-leads.html" class="side-link" data-key="report-leads" title="Laporan Leads">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
+        <span class="side-link__text">Laporan Leads</span>
+      </a>
+      <a href="report-prospects.html" class="side-link" data-key="report-prospects" title="Laporan Prospek">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
+        <span class="side-link__text">Laporan Prospek</span>
+      </a>
+    </nav>
+    <div class="sidebar__foot">
+      <div class="app-clock" id="appClock"><b>-</b></div>
+    </div>
+  </aside>
+
+  <!-- ============================= CONTENT ============================= -->
+  <div class="app-content">
+    <main class="app-main">
+
+      <div class="page-head">
+        <div>
+          <h2 class="page-head__title">Transaksi Prospek</h2>
+          <p class="page-head__desc">Peluang bisnis terkualifikasi yang dirujuk langsung dari Nomor Bukti Leads tersimpan.</p>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="text" id="searchProspects" placeholder="Cari Nomor Bukti, Ref. Leads, atau Customer…">
+        </div>
+        <select class="select-filter" id="filterPicProspects"></select>
+        <div class="date-filter">
+          <input type="date" id="dateFromProspects" title="Dari tanggal">
+          <span>–</span>
+          <input type="date" id="dateToProspects" title="Sampai tanggal">
+        </div>
+        <button class="btn btn-ghost btn-sm" id="btnResetProspects">Reset Filter</button>
+        <div class="spacer"></div>
+        <button class="btn btn-outline" id="btnImportProspects">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3M12 15l-4-4M12 15l4-4M4 21h16"/></svg>
+          Import
+        </button>
+        <button class="btn btn-accent" id="btnNewProspects">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
+          New Prospek
+        </button>
+      </div>
+
+      <div class="table-card">
+        <div class="table-scroll">
+          <table class="grid" id="tableProspects">
+            <thead>
+              <tr>
+                <th data-sort="id">Nomor Bukti Prospek <span class="sort-ico">↕</span></th>
+                <th data-sort="leadsRef">Ref. Nomor Bukti Leads <span class="sort-ico">↕</span></th>
+                <th data-sort="customerName">Customer <span class="sort-ico">↕</span></th>
+                <th class="no-sort">Produk</th>
+                <th data-sort="prospectsAmount">Prospects Amount <span class="sort-ico">↕</span></th>
+                <th data-sort="picName">PIC <span class="sort-ico">↕</span></th>
+                <th data-sort="leadsDate">Tanggal <span class="sort-ico">↕</span></th>
+                <th class="no-sort" style="text-align:right;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="table-footer">
+          <span id="countProspects">Menampilkan 0 dari 0 transaksi</span>
+          <div class="pagination" id="paginationProspects"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ============================= OVERLAY ============================= -->
+<div class="overlay" id="overlay"></div>
+
+<!-- ============================= LOOKUP MODAL ============================= -->
+<div class="modal" id="modalLookup">
+  <div class="modal__head">
+    <div>
+      <h3>Pilih Nomor Bukti Leads</h3>
+      <p>Cari dan pilih transaksi Leads sebagai acuan data Prospek</p>
+    </div>
+    <button class="modal__close" id="lookupClose">✕</button>
+  </div>
+  <div class="modal__body">
+    <div class="lookup-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="lookupSearch" placeholder="Cari Nomor Bukti atau Nama Customer…">
+    </div>
+    <div class="lookup-head">
+      <span>Nomor Bukti</span><span>Tanggal</span><span>Customer</span><span>Produk</span><span>Total Amount</span><span>Rating</span>
+    </div>
+    <div id="lookupResults"></div>
+  </div>
+</div>
+
+<!-- ============================= PQL WARNING MODAL ============================= -->
+<div class="modal modal--sm" id="modalPqlWarn">
+  <div class="modal__body" style="padding-top:22px;">
+    <div class="confirm-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9L2.7 17.5A2 2 0 0 0 4.5 20.5h15a2 2 0 0 0 1.8-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+    </div>
+    <h3 style="margin:0 0 6px;font-family:'Space Grotesk',sans-serif;font-size:15.5px;">Peringatan: PQL Bernilai "No"</h3>
+    <p style="margin:0;font-size:13px;color:var(--text-secondary);">Leads yang dipilih belum berstatus Prospect Qualified Leads (PQL = No). Apakah Anda tetap ingin melanjutkan membuat transaksi Prospek dari data ini?</p>
+  </div>
+  <div class="modal__foot">
+    <button class="btn btn-outline" id="pqlWarnCancel">Batal</button>
+    <button class="btn btn-accent" id="pqlWarnContinue">Lanjutkan</button>
+  </div>
+</div>
+
+<!-- ============================= DELETE CONFIRM MODAL ============================= -->
+<div class="modal modal--sm" id="modalConfirm">
+  <div class="modal__body" style="padding-top:22px;">
+    <div class="confirm-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16Z"/></svg>
+    </div>
+    <h3 style="margin:0 0 6px;font-family:'Space Grotesk',sans-serif;font-size:15.5px;">Hapus Data Transaksi?</h3>
+    <p id="confirmText" style="margin:0;font-size:13px;color:var(--text-secondary);">Apakah Anda yakin ingin menghapus data ini?</p>
+  </div>
+  <div class="modal__foot">
+    <button class="btn btn-outline" id="confirmCancel">Batal</button>
+    <button class="btn btn-danger" id="confirmDeleteBtn">Ya, Hapus Data</button>
+  </div>
+</div>
+
+<!-- ============================= IMPORT WIZARD MODAL ============================= -->
+<div class="modal modal--lg" id="modalImportProspects">
+  <div class="modal__head">
+    <div>
+      <h3>Import Transaksi Prospek</h3>
+      <p>Unduh template, isi data pada Excel, lalu unggah untuk mengimpor beberapa transaksi Prospek sekaligus.</p>
+    </div>
+    <button class="modal__close" id="importCloseProspects">✕</button>
+  </div>
+  <div class="modal__body">
+    <div class="import-steps">
+      <div class="import-step">
+        <h4><span class="step-badge">1</span> Unduh Template</h4>
+        <p>Template Excel berisi kolom sesuai kebutuhan sistem, sheet "Petunjuk Pengisian", dan contoh data (termasuk contoh multi item).</p>
+        <button type="button" class="btn btn-accent btn-sm" id="btnDownloadTemplateProspects">⬇️ Unduh Template Excel</button>
+      </div>
+      <div class="import-step">
+        <h4><span class="step-badge">2</span> Unggah File Terisi</h4>
+        <p>Pilih file Excel (.xlsx) yang sudah diisi. Setiap transaksi wajib mengisi Ref. Nomor Bukti Leads yang valid dan belum memiliki Prospek.</p>
+        <div class="import-drop"><input type="file" id="importFileProspects" accept=".xlsx,.xls"></div>
+      </div>
+    </div>
+    <div class="import-summary" id="importSummaryProspects"></div>
+    <div class="import-preview" id="importPreviewProspects"></div>
+  </div>
+  <div class="modal__foot">
+    <button class="btn btn-outline" id="importCancelProspects">Tutup</button>
+    <button class="btn btn-primary" id="btnCommitImportProspects" disabled>Import Data</button>
+  </div>
+</div>
+
+<div class="toast-stack" id="toastStack"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="common.js"></script>
+<script src="prospects-list.js"></script>
+</body>
+</html>

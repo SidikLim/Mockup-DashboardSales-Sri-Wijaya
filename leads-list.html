@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transaksi Leads — Leads &amp; Prospek Management</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ============================= SIDEBAR ============================= -->
+  <aside class="sidebar" id="sidebar">
+    <button class="sidebar__collapse-btn" id="sidebarCollapseBtn" title="Ciutkan / perluas menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <div class="sidebar__brand">
+      <div class="sidebar__brand-mark">LP</div>
+      <div class="sidebar__brand-text">
+        <h1>Leads &amp; Prospek</h1>
+        <span>Management System</span>
+      </div>
+    </div>
+    <nav class="sidebar__nav">
+      <div class="sidebar__section-label">Dashboard</div>
+      <a href="dashboard-tier1.html" class="side-link" data-key="dashboard-tier1" title="Dashboard SSM Tier 1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V10M10 19V4M16 19v-6M4 19h16"/></svg>
+        <span class="side-link__text">Dashboard SSM Tier 1</span>
+      </a>
+      <a href="dashboard-tier2.html" class="side-link" data-key="dashboard-tier2" title="Dashboard SSM Tier 2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V10M10 19V4M16 19v-6M4 19h16"/></svg>
+        <span class="side-link__text">Dashboard SSM Tier 2</span>
+      </a>
+      <div class="sidebar__section-label">Transaksi</div>
+      <a href="leads-list.html" class="side-link" data-key="leads-list" title="Transaksi Leads">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+        <span class="side-link__text">Transaksi Leads</span> <span class="count-pill" id="sideCountLeads">0</span>
+      </a>
+      <a href="prospects-list.html" class="side-link" data-key="prospects-list" title="Transaksi Prospek">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+        <span class="side-link__text">Transaksi Prospek</span> <span class="count-pill" id="sideCountProspects">0</span>
+      </a>
+      <div class="sidebar__section-label">Report</div>
+      <a href="report-leads.html" class="side-link" data-key="report-leads" title="Laporan Leads">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
+        <span class="side-link__text">Laporan Leads</span>
+      </a>
+      <a href="report-prospects.html" class="side-link" data-key="report-prospects" title="Laporan Prospek">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
+        <span class="side-link__text">Laporan Prospek</span>
+      </a>
+    </nav>
+    <div class="sidebar__foot">
+      <div class="app-clock" id="appClock"><b>-</b></div>
+    </div>
+  </aside>
+
+  <!-- ============================= CONTENT ============================= -->
+  <div class="app-content">
+    <main class="app-main">
+
+      <div class="page-head">
+        <div>
+          <h2 class="page-head__title">Transaksi Leads</h2>
+          <p class="page-head__desc">Pencatatan calon pelanggan potensial — sumber leads, alokasi PIC Sales, kategori produk, dan estimasi nilai.</p>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-card" data-tone="amber">
+          <div class="stat-card__label">Total Leads</div>
+          <div class="stat-card__value" id="statTotalLeads">0</div>
+          <div class="stat-card__sub">Seluruh transaksi tersimpan</div>
+        </div>
+        <div class="stat-card" data-tone="hot">
+          <div class="stat-card__label">Rating Hot</div>
+          <div class="stat-card__value" id="statHotLeads">0</div>
+          <div class="stat-card__sub">Prioritas tindak lanjut tinggi</div>
+        </div>
+        <div class="stat-card" data-tone="cold">
+          <div class="stat-card__label">Total Prospek</div>
+          <div class="stat-card__value" id="statTotalProspects">0</div>
+          <div class="stat-card__sub">Peluang bisnis terkualifikasi</div>
+        </div>
+        <div class="stat-card" data-tone="warm">
+          <div class="stat-card__label">Nilai Prospek</div>
+          <div class="stat-card__value" id="statProspectsValue">Rp 0</div>
+          <div class="stat-card__sub">Akumulasi Prospects Amount</div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="text" id="searchLeads" placeholder="Cari Nomor Bukti atau Nama Customer…">
+        </div>
+        <select class="select-filter" id="filterRatingLeads"></select>
+        <select class="select-filter" id="filterPicLeads"></select>
+        <div class="date-filter">
+          <input type="date" id="dateFromLeads" title="Dari tanggal">
+          <span>–</span>
+          <input type="date" id="dateToLeads" title="Sampai tanggal">
+        </div>
+        <button class="btn btn-ghost btn-sm" id="btnResetLeads">Reset Filter</button>
+        <div class="spacer"></div>
+        <button class="btn btn-outline" id="btnImportLeads">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3M12 15l-4-4M12 15l4-4M4 21h16"/></svg>
+          Import
+        </button>
+        <a class="btn btn-accent" href="leads-form.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
+          New Leads
+        </a>
+      </div>
+
+      <div class="table-card">
+        <div class="table-scroll">
+          <table class="grid" id="tableLeads">
+            <thead>
+              <tr>
+                <th data-sort="id">Nomor Bukti <span class="sort-ico">↕</span></th>
+                <th data-sort="leadsDate">Leads Date <span class="sort-ico">↕</span></th>
+                <th data-sort="customerName">Customer <span class="sort-ico">↕</span></th>
+                <th class="no-sort">Produk</th>
+                <th data-sort="picName">PIC Name <span class="sort-ico">↕</span></th>
+                <th data-sort="leadsRating">Rating <span class="sort-ico">↕</span></th>
+                <th data-sort="totalAmount">Total Amount <span class="sort-ico">↕</span></th>
+                <th class="no-sort">Status Prospek</th>
+                <th class="no-sort" style="text-align:right;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="table-footer">
+          <span id="countLeads">Menampilkan 0 dari 0 transaksi</span>
+          <div class="pagination" id="paginationLeads"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ============================= OVERLAY + CONFIRM DELETE MODAL ============================= -->
+<div class="overlay" id="overlay"></div>
+<div class="modal modal--sm" id="modalConfirm">
+  <div class="modal__body" style="padding-top:22px;">
+    <div class="confirm-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16Z"/></svg>
+    </div>
+    <h3 style="margin:0 0 6px;font-family:'Space Grotesk',sans-serif;font-size:15.5px;">Hapus Data Transaksi?</h3>
+    <p id="confirmText" style="margin:0;font-size:13px;color:var(--text-secondary);">Apakah Anda yakin ingin menghapus data ini?</p>
+  </div>
+  <div class="modal__foot">
+    <button class="btn btn-outline" id="confirmCancel">Batal</button>
+    <button class="btn btn-danger" id="confirmDeleteBtn">Ya, Hapus Data</button>
+  </div>
+</div>
+
+<!-- ============================= IMPORT WIZARD MODAL ============================= -->
+<div class="modal modal--lg" id="modalImportLeads">
+  <div class="modal__head">
+    <div>
+      <h3>Import Transaksi Leads</h3>
+      <p>Unduh template, isi data pada Excel, lalu unggah untuk mengimpor beberapa transaksi Leads sekaligus.</p>
+    </div>
+    <button class="modal__close" id="importCloseLeads">✕</button>
+  </div>
+  <div class="modal__body">
+    <div class="import-steps">
+      <div class="import-step">
+        <h4><span class="step-badge">1</span> Unduh Template</h4>
+        <p>Template Excel berisi kolom sesuai kebutuhan sistem, sheet "Petunjuk Pengisian", dan contoh data (termasuk contoh multi item).</p>
+        <button type="button" class="btn btn-accent btn-sm" id="btnDownloadTemplateLeads">⬇️ Unduh Template Excel</button>
+      </div>
+      <div class="import-step">
+        <h4><span class="step-badge">2</span> Unggah File Terisi</h4>
+        <p>Pilih file Excel (.xlsx) yang sudah diisi sesuai template. Baris dengan "No Transaksi" yang sama akan digabung menjadi 1 transaksi multi item.</p>
+        <div class="import-drop"><input type="file" id="importFileLeads" accept=".xlsx,.xls"></div>
+      </div>
+    </div>
+    <div class="import-summary" id="importSummaryLeads"></div>
+    <div class="import-preview" id="importPreviewLeads"></div>
+  </div>
+  <div class="modal__foot">
+    <button class="btn btn-outline" id="importCancelLeads">Tutup</button>
+    <button class="btn btn-primary" id="btnCommitImportLeads" disabled>Import Data</button>
+  </div>
+</div>
+
+<div class="toast-stack" id="toastStack"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="common.js"></script>
+<script src="leads-list.js"></script>
+</body>
+</html>

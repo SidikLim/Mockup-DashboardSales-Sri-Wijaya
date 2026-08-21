@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard SSM Tier 2 — Leads &amp; Prospek Management</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ============================= SIDEBAR ============================= -->
+  <aside class="sidebar" id="sidebar">
+    <button class="sidebar__collapse-btn" id="sidebarCollapseBtn" title="Ciutkan / perluas menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <div class="sidebar__brand">
+      <div class="sidebar__brand-mark">LP</div>
+      <div class="sidebar__brand-text">
+        <h1>Leads &amp; Prospek</h1>
+        <span>Management System</span>
+      </div>
+    </div>
+    <nav class="sidebar__nav">
+      <div class="sidebar__section-label">Dashboard</div>
+      <a href="dashboard-tier1.html" class="side-link" data-key="dashboard-tier1" title="Dashboard SSM Tier 1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V10M10 19V4M16 19v-6M4 19h16"/></svg>
+        <span class="side-link__text">Dashboard SSM Tier 1</span>
+      </a>
+      <a href="dashboard-tier2.html" class="side-link" data-key="dashboard-tier2" title="Dashboard SSM Tier 2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V10M10 19V4M16 19v-6M4 19h16"/></svg>
+        <span class="side-link__text">Dashboard SSM Tier 2</span>
+      </a>
+      <div class="sidebar__section-label">Transaksi</div>
+      <a href="leads-list.html" class="side-link" data-key="leads-list" title="Transaksi Leads">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+        <span class="side-link__text">Transaksi Leads</span> <span class="count-pill" id="sideCountLeads">0</span>
+      </a>
+      <a href="prospects-list.html" class="side-link" data-key="prospects-list" title="Transaksi Prospek">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+        <span class="side-link__text">Transaksi Prospek</span> <span class="count-pill" id="sideCountProspects">0</span>
+      </a>
+      <div class="sidebar__section-label">Report</div>
+      <a href="report-leads.html" class="side-link" data-key="report-leads" title="Laporan Leads">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
+        <span class="side-link__text">Laporan Leads</span>
+      </a>
+      <a href="report-prospects.html" class="side-link" data-key="report-prospects" title="Laporan Prospek">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
+        <span class="side-link__text">Laporan Prospek</span>
+      </a>
+    </nav>
+    <div class="sidebar__foot">
+      <div class="app-clock" id="appClock"><b>-</b></div>
+    </div>
+  </aside>
+
+  <!-- ============================= CONTENT ============================= -->
+  <div class="app-content">
+    <main class="dash-main">
+
+      <!-- Banner -->
+      <div class="dash-banner">
+        <div class="dash-banner__stripes"><span></span><span></span><span></span></div>
+        <div>
+          <div class="dash-banner__title">
+            <h1>DASHBOARD <b>SSM</b></h1>
+            <span class="dash-tier-badge">Tier - 2</span>
+          </div>
+          <p class="dash-banner__sub">Sriwijaya Sales Monitoring — Analisa Produk &amp; Customer</p>
+        </div>
+        <div class="dash-banner__logo">PT<br>PMP</div>
+      </div>
+
+      <!-- Filter pills -->
+      <div class="dash-filters">
+        <div class="dash-pill dash-pill--range">
+          <label>Rentang Tanggal</label>
+          <input type="date" id="dashDateFrom">
+          <span class="sep">–</span>
+          <input type="date" id="dashDateTo">
+        </div>
+        <div class="dash-pill">
+          <label>Customer</label>
+          <select id="dashFilterCustomer"></select>
+        </div>
+        <div class="dash-pill">
+          <label>Sales Name</label>
+          <select id="dashFilterSales"></select>
+        </div>
+        <button class="btn btn-ghost btn-sm dash-reset" id="dashResetFilter">Reset Filter</button>
+      </div>
+
+      <!-- ============== ANALISA PRODUK & CUSTOMER ================ -->
+      <h2 class="dash-section-title">Analisa Produk &amp; Customer</h2>
+
+      <div class="dash-pivot-card" id="tableCustomerModel" style="margin-bottom:18px;"></div>
+
+      <div class="dash-row">
+        <div class="dash-card dash-lq-card">
+          <h3 class="dash-card__title">LQ Segregation by Probability (%)</h3>
+          <div class="dash-chart-wrap" style="height:260px;">
+            <canvas id="chartLQ"></canvas>
+          </div>
+          <p class="dash-note">LQ (Live Quotation) = Total Amount transaksi Leads, dikelompokkan berdasarkan status kualifikasi (PQL/QQL) &amp; Leads Rating.</p>
+        </div>
+        <div class="dash-card">
+          <h3 class="dash-card__title">LQ by Product Group &amp; Product Model</h3>
+          <div class="dash-legend treemap__legend" id="treemapLegend"></div>
+          <div class="treemap" id="treemapContainer"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="common.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<script src="dashboard-common.js"></script>
+<script>
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => initDashboard('tier2'));
+  else initDashboard('tier2');
+</script>
+</body>
+</html>
